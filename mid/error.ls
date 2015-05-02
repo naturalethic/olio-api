@@ -26,7 +26,7 @@ module.exports = (next) ->*
     if code and code >= 400 and code < 500
       @response.body = e.message ?= http.STATUS_CODES[e.code.to-string!]
       error e.to-string!red
-    else if code
+    else if code or !e.stack
       error e.to-string!red
     else
       error e.stack.red
