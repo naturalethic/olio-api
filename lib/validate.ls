@@ -25,7 +25,7 @@ module.exports = validate = (data, definition, field, extra-validators = {}) ->*
       data[key] = data[key].trim!
     for vkey, vval of def
       continue if vkey == \optional
-      throw "Tried to validate unknown type: #vkey" if not (validate[vkey] or extra-validators[vkey])
+      throw "Unknown validation: #vkey" if not (validate[vkey] or extra-validators[vkey])
       try
         if extra-validators[vkey]
           if /^function\*/.test extra-validators[vkey].to-string!
@@ -45,12 +45,6 @@ module.exports = validate = (data, definition, field, extra-validators = {}) ->*
   return invalid[field]
 
 validate.conditional = -> # Means the value isn't required, but must pass validations
-
-validate.token = (data, key, option) ->
-  throw 'Malformed token' if not /^[0-9a-z]{32}$/.test data[key]
-
-validate.hint = (data, key, option) ->
-  throw 'Malformed hint' if not /^[0-9a-z]{4}$/.test data[key]
 
 validate.email = (data, key, option) ->
   data[key] = data[key].to-lower-case!
@@ -124,3 +118,7 @@ validate.time = (data, key, option) ->
 
 validate.values = (data, key, option) ->
   throw 'not in values' if data[key] not in option
+
+if fs.exists-sync "#{process.cwd!}/validate.ls"
+  for key, val of require "#{process.cwd!}/validate.ls"
+    validate[key] = val
