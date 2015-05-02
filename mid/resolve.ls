@@ -3,7 +3,7 @@ require! \inflection
 
 api = require-dir \api
 
-olio.config.api.logip ?= true
+olio.config.api.log-ip ?= true
 
 module.exports = (next) ->*
   # Camelize query parameters
@@ -26,9 +26,11 @@ module.exports = (next) ->*
   else
     log += "NOTFOUND"
     color = \yellow
+  if olio.config.api.resolve-session-id
+    log += " [#{olio.config.api.resolve-session-id(this)}]"
   if olio.config.api.logip
-    log += " [#{@ip}]"
-  log += " #{@url}"
+    log += " (#{@ip})"
+  log += " #{@url.split('?').0}"
   info log[color]
   return if not @api
   yield next
