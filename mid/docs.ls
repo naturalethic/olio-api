@@ -37,7 +37,7 @@ docs = """
 
 module.exports = (next) ->*
   if @url == olio.config.api.docs
-    @response.body = yield documentation!
+    @response.body = docs
     @response.status = 200
     return
   yield next
