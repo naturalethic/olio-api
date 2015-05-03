@@ -17,20 +17,9 @@ module.exports = (next) ->*
   #   /user        => user.user
   #   /users       => user.users
   #   /user/create => user.create
-  segments = filter id, @url.split('?').0.split('/')
+  path = @url.split('?').0
+  segments = filter id, path.split('/')
   @api = (api[segments.0] and ((!segments.1 and api[segments.0][segments.0]) or api[segments.0][segments.1])) or (api[inflection.singularize segments.0] and api[inflection.singularize segments.0][segments.0])
-  log = "#{moment!format 'YYYY-MM-DD HH:mm:ss'} "
-  if @api
-    log += "DISPATCH"
-    color = \blue
-  else
-    log += "NOTFOUND"
-    color = \yellow
-  if olio.config.api.resolve-session-id
-    log += " [#{olio.config.api.resolve-session-id(this)}]"
-  if olio.config.api.logip
-    log += " (#{@ip})"
-  log += " #{@url.split('?').0}"
-  info log[color]
+  @log path, ((@api and \DISPATCH) or \NOTFOUND), ((@api and \blue) or \yellow) if @log
   return if not @api
   yield next
