@@ -88,6 +88,9 @@ validate.longitude = (data, key, option) ->
 validate.float = (data, key, option) ->
   throw 'not a float' if parse-float(data[key]) == NaN
 
+validate.object = (data, key, option) ->
+  throw 'Must be an object' if !is-object data[key]
+
 validate.lowercase = (data, key, option) ->
   throw 'must be lower case' if /[A-Z]/.test data[key]
 
