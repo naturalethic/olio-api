@@ -7,7 +7,7 @@ olio.config.api.log-ip ?= true
 
 module.exports = (next) ->*
   # Camelize query parameters
-  if typeof! @request.body == \Array
+  if is-array @request.body
     @in = @request.body |> map ~> (pairs-to-obj (obj-to-pairs @query |> map ~> [(camelize it.0), it.1])) <<< it
   else
     @in = (pairs-to-obj (obj-to-pairs @query |> map -> [(camelize it.0), it.1])) <<< @request.body

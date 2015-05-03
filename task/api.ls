@@ -11,7 +11,7 @@ olio.config.api.proxy ?= false
 export api = ->*
   app = koa!
   app.use koa-gzip!
-  app.use koa-bodyparser!
+  app.use koa-bodyparser detectJSON: -> true
   app.proxy = olio.config.api.proxy
   mid = require-dir ...((glob.sync "#{process.cwd!}/node_modules/olio*/mid") ++ "#{process.cwd!}/mid")
   if olio.config.api.mid
