@@ -1,23 +1,13 @@
 require! \koa
 require! \koa-gzip
 require! \koa-bodyparser
-require! \node-notifier
 
-export watch = <[ host.ls olio.ls validation.ls api mid lib public/index.js ]>
+export watch = <[ host.ls olio.ls validation.ls api mid lib ]>
 
 olio.config.api       ?= {}
 olio.config.api.name  ?= \Olio
 olio.config.api.port  ?= 9001
 olio.config.api.proxy ?= false
-
-notify = (message) ->
-  if olio.config.growl
-    try
-      nn = require 'node-notifier'
-      nn.notify do
-        title: 'Cops For Hire'
-        message: message
-
 
 export api = ->*
   app = koa!
@@ -37,4 +27,3 @@ export api = ->*
       app.use mid[m]
   app.listen olio.config.api.port
   info "Started API on port #{olio.config.api.port}".green
-  node-notifier.notify title: olio.config.api.name, message: "Started API on port #{olio.config.api.port}"

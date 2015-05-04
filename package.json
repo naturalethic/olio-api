@@ -7,7 +7,6 @@
     "koa": "^0.19.1",
     "koa-bodyparser": "^1.5.0",
     "koa-gzip": "^0.1.0",
-    "moment": "^2.10.2",
-    "node-notifier": "^4.2.1"
+    "moment": "^2.10.2"
   }
 }
