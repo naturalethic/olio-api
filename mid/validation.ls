@@ -1,4 +1,5 @@
 require! \util
+validate = require '../validate'
 
 class ValidationError extends Error
   (@message) ~>
@@ -13,5 +14,5 @@ class ValidationError extends Error
 module.exports = (next) ->*
   if is-array @api
     return if not definition = first(@api |> filter -> is-object it)
-    throw ValidationError invalid if not empty(keys(invalid = yield @validate @in, definition))
+    throw ValidationError invalid if not empty(keys(invalid = yield validate @in, definition))
   yield next
