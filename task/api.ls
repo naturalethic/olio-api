@@ -2,7 +2,7 @@ require! \koa
 require! \koa-gzip
 require! \koa-bodyparser
 
-export watch = <[ host.ls olio.ls validation.ls api mid lib ]>
+export watch = <[ host.ls olio.ls validate.ls api mid lib ]>
 
 olio.config.api       ?= {}
 olio.config.api.name  ?= \Olio
