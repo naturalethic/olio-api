@@ -6,7 +6,7 @@ olio.config.api.docs ?= '/'
 api = require-dir \api
 
 content = []
-content.push "\n\# Rapsheet API"
+content.push "\n\# #{olio.config.api.name} API"
 content.push "***\n"
 for aname, amod of api
   content.push "\#\#\# #{aname.to-upper-case!}\n"
@@ -24,7 +24,7 @@ docs = """
   <!DOCTYPE html>
   <html>
     <head>
-      <title>Rapsheet</title>
+      <title>#{olio.config.api.name} API</title>
     </head>
     <body>
       <xmp theme="cyborg" style="display:none">

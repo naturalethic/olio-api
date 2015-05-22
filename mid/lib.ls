@@ -2,7 +2,7 @@ module.exports = (next) ->*
   for name, lib of olio.lib
     throw @error "Library clobbers existing property: #name" if @[name]
     @[name] ?= {}
-    @[name].error = @error if @error
+    @[name].error = @error
     if is-function lib
       @[name] = lib
     else
