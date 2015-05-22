@@ -1,8 +1,12 @@
 {
   "name": "olio-api",
   "version": "0.0.1",
+  "description": "olio api",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/naturalethic/olio-api"
+  },
   "dependencies": {
-    "glob": "^5.0.5",
     "inflection": "^1.7.0",
     "koa": "^0.19.1",
     "koa-bodyparser": "^1.5.0",
